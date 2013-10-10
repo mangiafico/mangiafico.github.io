@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>mangiafico</title>
+<style>
+body { margin: 0; background: black }
+div { position: absolute; left: 0; top: 0; width: 100%; height: 100% }
+img { position: absolute; margin: auto; left: 0; top: 0; right: 0; bottom: 0; max-width: 100%; max-height: 100%; opacity: 0; transition: opacity 2s ease-in-out; -webkit-transition: opacity 2s ease-in-out }
+</style>
+</head>
+<body>
+
+<script>
+
+var srcs = [
+"http://lh6.ggpht.com/g3Wx_B24Qvl_PLVVLZj7mZiiA4KEGLWU9_QEjG2NAtozP3f-kFOkk_MBe6Vaw3y2zg_lWVOW0rm6NGu2e6nTEOwVU3Y", 
+"http://lh6.ggpht.com/KrgGLhFpnU-x8NODApwBMU7Co355Q3Zo87qRvLiPxVyKHmnsVZWngjWGiLpTItE7p06bJHxVi89fdHq_R8RRHi0C8u-Z", 
+"http://lh5.ggpht.com/8sIK4OxFQ0hW6oQdPX5W1fFEBT7rKQewek37udlVh2uKFh5FVWiUyZOZosFCpXOL-YXbl5HVueLnsiu8i1ne8stk85Q", 
+"http://lh4.ggpht.com/S52AbUuRsRuGRKYlx_W-N5xOM-k4H7n4bBdHzywNvyOm3n-1q9Zz8VW7UtLdEoosEOOLADKWa_HVcGZ6ik8JydpZsXk8", 
+"http://lh5.ggpht.com/AJ-KYRz-TdkiA3wMaJyocfIobpkR_i6dKX5gWvWMPnr7PesSNPUZ0MyOGk48pqMUl8zfqFc36NnoNrvrzB8E6VXgjkVX", 
+"http://lh3.ggpht.com/8kxg4KS_2q8yur-1CTWHKmCYVAtmn_zhomqfTh-Cc-nphxf_xIe39pNUk-0TnnRDt6C6Vb_nfnPtMeIyNLq4YDf1zZQ", 
+"http://lh6.ggpht.com/K2W8YlEokzKIoW1g3_3Dm68p0QMAq6JwNHl2bWPi0dCF6WuICMydpaQ00NGPGtHDw-_cFXFBqTWD5lAeB-PnDG98Wh0", 
+"http://lh4.ggpht.com/CdJvX8IFInGe4Z2o7C4RD3az-tPgENP0wGdOecPpi4KBcid0cwTYMlJ-N0c1_XptVJfaVd78GDjzoglijCdcSXlztwI", 
+"http://lh6.ggpht.com/RmuZ7hDQkOsMiUlttW5plYmO0AuFEaJkqcfLWTHQ_t0z1I_jhIx4gECg6hg3er4A_zG9cYyTv1enuz8zK24QW38voCo", 
+"http://lh6.ggpht.com/EQKSir_156-C6xpGzS4HPFR9ssaHxvaxNVlvgGDul4wGTKAE-MUJjD93UhNc2OcdL9J7B9E8pP5LRAe8JQyr3ZXVmcY", 
+"http://lh6.ggpht.com/V-H2VF762FHajvJo8CcoA7l87iIAhO-HpegcQLCu9cUNzS0AlOj9p4DaHa6rChe_jtDilYJhG0pkCDml_BhRSK9eIZY", 
+"http://lh5.ggpht.com/U1IWNg4vvIRtcVhUVHZozDlq8xnHmilZFP3Qurd1KIe_kpLY9UfDceat160UDzcxfAxHkZr7g4H5k0UJRzVXrv4-Xf0", 
+"http://lh4.ggpht.com/QvHEsXcmMOvXtG50p5DoXigkDI5ASJbZf3fNgcUP_kSNRYAqXG5WfdqFUNRLzX6vl_ga0lwXBXKHk-mqGPtHE5vzzvw", 
+"http://lh6.ggpht.com/PnKloa5UDmA3ayOvwWMzzlnEaM7GrJAMdVJUoUYypBc0emxeFGdQsQMTlbGNQNRf5QNl-2WRonVh08To7Yr5aVSQ2zk", 
+"http://lh6.ggpht.com/lNWLf--UlGMl1ktsIrr9RPVpvXV7GRn120BTvMCmMEG462MFsKEw-zi15wKGE7BgWknFhCQggwR167ctH_-4XneLmLs", 
+"http://lh4.ggpht.com/o4-2GOtcqGJyeUe11uSu4Zj3jaW9QI_RCpylzzVYfrLGb0UN234aRrx92B9MgQcNIo5Bmj0hn33wmbKGnADIPDzHYt8N", 
+"http://lh5.ggpht.com/s-tLh_SgxgjztBekax6AwnAVGEysOEQSsaKc8hp8Hj-dweAFqe9jYkWXFevSX_XbyisUETkvUVFKrKgKqxNH2vuWpg", 
+"http://lh3.ggpht.com/xUtvI3s9QTiSZfsQK1qKHSLz8KczGYkIVr2DpREo4H7qhIGfIEHFAwg44KG-6uWoTQplVqidEG4lsv752Hdk_8Ljwhbs", 
+"http://lh4.ggpht.com/zUrNe6BVosJBOoMd8H6yi-688oipOcoC4-jHmY9QelOJKUr7NtcJtzEAYPOlDtq-jMGXNCrib1RP8zZD1sSzg_QH2d3U", 
+"http://lh3.ggpht.com/Yxu4aEI7PWgysRKFfCEsNC1AiXn2igDTP8NWsQ35pUUY82NKUej4MFpZQ7xV6Np0pPn88DwIAwjyLxoo8fL8LWq5ymBG", 
+"http://lh4.ggpht.com/XhGFiO9FKM5ehqHwgsHqXEvEMBzDfvVV7DxiNSyey1d0KSJX_Wyn5VQlrWoHxih5FHj3LjK800ZsV_45Eew11NuE7ik", 
+"http://lh4.ggpht.com/76dLbERExh_MpXszTmJS6IPRI3UdidkN3con84RsN1qlVhHfR8C1RXD1-pVVxUWhWCL0-kretZir1JNSOf03Fn3j4Q", 
+"http://lh3.ggpht.com/Enr89AxZu1oWq-l7xF_7DdvCGbKmcfwF9IWz8LK4Pb_15RNVGSa2J3konF55DJfsdXybbpEJ3Q3efTpArn8QgnzKbd0", 
+"http://lh6.ggpht.com/x3qla59mZoGKlsyHC7BSkWhTHSPhETxwkzYclFPS9REuDzUxDlbAnfnb_ynfoDVJIWS-aRMbIehFiEYTsn1dAEDDwN2T", 
+"http://lh5.ggpht.com/JVZVJymjCzpCZLEQF4E6fMUmLjcFl_MHjv4DFGojCaDWwm0WLKnJxn1IiefhzdsVVzLTuBSEaMx1quJoQo7u2ghTLA", 
+"http://lh5.ggpht.com/Ixu99Q4IblAfD0yJQO1YUedz9Op1PDhAlvI0R-deMtpjBjGlAT4sbXQ2XbycPvXnozgVifYE9uZ9eAFFTARFH4rOAQ6l", 
+"http://lh3.ggpht.com/555p7-X5v_0ssF5_TLhMqx8faiiLcJ3tSMERoBN7ZZF9PyVZ1TN9zCeCe989x0HPLj6CyLmjeeuwZdTifRCBM3R2E7A", 
+"http://lh3.ggpht.com/CzJI7A-NhYH_GCtRWoDO9qZCdxB1oH1mhtk1vX6r_K49EGJld-pkfuY7STlztrEAjofCeBwLFy9w2AhtB11wpJe04eA", 
+"http://lh3.ggpht.com/Dpw9RhRFFg2CDzoeepfDe8dxfT_aU0jVtxbGbI4BYTmhse2AQdIVYx2qFTyivhDj3vg7e-qIiK7N6_LZr1MEZaMCXOHd", 
+"http://lh4.ggpht.com/UzhGVZzXAyJtrIG6A9tAttPWxa4xUZiTBnkP9PxvTKya--9hwHJ1jh9LbDQgfJCh_35-KIytzX-AO8IIVID_udOkNe02", 
+"http://lh6.ggpht.com/Akfk-lzHwuwyfV1pBu0BlCXUHWziCiYZMgiEFAjOMXo_rQ03BOKY3Sb5oYEsXlj4km-WdnVC1rQ1U-sWAbYh-Ivm0H0", 
+"http://lh4.ggpht.com/34jCibLB8WuGnPXEBb35EkrAXFF7gxkl7iM6VAPHWf-nBT1yF11Ob_OOy-4dLdbyfy6hNy6cAANIM8W5OhFBxnzCtmo", 
+"http://lh6.ggpht.com/DYJVMvhqLHc5SPBYWcUaTj2zu_dWEIVXpnbmJ_6E14b7PInc8VcBRUnFZB-30ZGZsoqC8fetE-mBfnOT2qXSXknlQA", 
+"http://lh6.ggpht.com/wg9qmg1iGBmWR02z5dmH4DGX1AXR7BblFlE1qzhwb9bRzAGtoO8uEwz1Lh4hDhclvQ8RTGuZbHjg3ZiSLri7sqbw63I", 
+"http://lh4.ggpht.com/O8wyB9_95FKYsb0x5nsWSpmmAKjOMgX2mZKt2rRsnZNm8yaVo3bDk2OQI3t4OO5x2mMhfg3oR5JQsb5sx30oUmHUuQ", 
+"http://lh6.ggpht.com/7sSPnuTCzW7no6VOHsrE5eD6LKGpGPa49GVMv1FKdTV7eJGfJXUEWsi0U14ozPXGMaC41NoJu6W0CiUIokypvNppoFM", 
+"http://lh3.ggpht.com/WhU3nskULqnAFVuWEXck3Urin4KoIxS5VEyzDSW6z9PHxOK1RN9pjlN6UDx4HhrULBI3PhwMnJuMy_oAiNF4DSootg", 
+"http://lh3.ggpht.com/1ueU1qXhvdMU90f-HEcxlTcVXiq1frQnxrXazgxu8LtD-kli2c9weS0ok-yiuK31eXDhZ7M31rvZwPHmGbXjJqzZUg", 
+"http://lh4.ggpht.com/V5gqhjWW-nHs_bewovemQWFOvYsBs3hnYRJ9f3n9MN2ExMrvDx_zaZYkyjT5wxnB7b_Jp8ahgdoiKwBQeOvrKjllx-Fk", 
+"http://lh4.ggpht.com/fTlDIm3b_l95YiXTtJMV8IIrtGuDlPCTF-IdOhDi2QYGlwrZ-9lAoQBt-J4BbLPQhs4qoxVYX5BiszK5KWH7wXwzseU", 
+"http://lh4.ggpht.com/vcULF0h4gplRMAX73FPHzRMK3JfCoGS4mXjF--QQh4ScfPl6c32ZljPhPI3P92Agpvoketq96v_XHwVzjegps-saCt2S", 
+"http://lh3.ggpht.com/GrvZ0kU3LO9G2ql24k1X_rcKu_K01Ewibu1r2lJgXFF8_8rXKHsy0HEdHTrFon-Cho0JmKEL90jN6C8cR5AKyLKcWQ", 
+"http://lh5.ggpht.com/sSduCeIslGaTuvLNqkq54HjB9vidkfSE80igjQdd4fWCt1tNixby3g5f1qgcmgdpOg3Cb279i5G_pDDcPlf-6dTRwgib", 
+"http://lh5.ggpht.com/B6qO-79lPTRc_xSc-1IPlwIVM029Fc1pvnkBMr9awuU4paEEpG41yVLLf0p-_P1dnSeejHsDfXuLxw1_VrumYl5feqrv", 
+"http://lh5.ggpht.com/KpodNIuxlAZafIQJF9Y6OiIbfq_8vJzg2szqCaqFtIdd6_gdQzDCgNP2XHsX1FvgwHbMkerPAxw3vj-C7pr9got0cQ", 
+"http://lh3.ggpht.com/U_giWhar_SaLgQnFr-ddLoKeyJVVXrqmrQ4OdmXs_DPPTS_blpldY3s7XRzOuAerF0OPvmGK3-Fya1aY4FvxkMgDlkY", 
+"http://lh3.ggpht.com/t6a-jYedJw_U0JvFVJqMFrmAvhR9YO8EUltRjSwt22xOdjQPmvqzzxQB3agX6squYWTB528J8UGKLcXLeTpNjPVcNg", 
+"http://lh5.ggpht.com/TSmkCI-uG89_M3ckZeU55sgIfmHuOJefqrjCPt8UGek3qTyENlfcSDSsGtdO5qcZGbEY3v6vep5KFAhNUPBAGh2PgRI", 
+"http://lh5.ggpht.com/PDqUwBzYdcqrna7lvr1dQgsYhH1rxNjXSCa98QzDW43ud5DGgT-vLjDBvgfLojYAYHzs4gjV5J4_xVPJkEogH81_Syk", 
+"http://lh3.ggpht.com/DNGK-w8LhBKKdqw-72-eNblLKfntGxn0FHBskeCKJTFdoOIlL8SUlMfw74F45od30SKEkmWZ4OauN-FzVggJq-fsroTI", 
+"http://lh3.ggpht.com/_u3TjlLLewLGkRtgS-MARVv0b3Bo5NveokWmgc1gV5BZ26XUPr0edvLDaHOaFpjqBu8i-gFiDEfT_vTGCa-oUPejGlmX", 
+"http://lh4.ggpht.com/55U1qFKLbGr3FURHVFD07nS4w9JI-pydt8fGcHBdGIIrKZHtQtHS5ReyQNXq8ba6Y5h3fGGbjWwnB7vVcURqZnqOAKg", 
+"http://lh6.ggpht.com/RpGCvyuDfRm3zq4eIwrPoEaGpWBDYe5BacF9wNL8mEPWmna48iKRe9wn2SHV3Vjk7ZREsXkXyLcPOsTG49borSqQXV_U", 
+"http://lh3.ggpht.com/LIUyCMMZNHFGThcFEPbmll7lGvdh6Ls1oP1VqB-HqRbCFjOOnFBNskSSJ_jAHy_VYviLdR6HtnWDa98JZU1EW_c1kzA", 
+"http://lh3.ggpht.com/GxMkH9FadyAJOvPVKBfkXusZGGTGKrac3piwKU3H1mbAEVY-dcXgUbnVh9wNZ80-GS7dnpKg5Kyo_L6NSdc0Hss3cQ"
+];
+
+(function() {
+	var i = srcs.length, j, temp;
+	while (0 !== i) {
+		j = Math.floor(Math.random() * i);
+		i -= 1;
+		temp = srcs[i];
+		srcs[i] = srcs[j];
+		srcs[j] = temp;
+	}
+})();
+
+var i = srcs.length - 1;
+
+var div = document.createElement('div');
+var img = document.createElement('img');
+div.appendChild(img);
+img.src = srcs[i] + "=s" + (window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight);
+img.onload = function() { img.style.opacity = 1; f(); };
+document.body.appendChild(div);	
+
+var paused = false;
+var resume;
+
+document.body.onclick = function() {
+	if (paused) {
+		paused = false;
+		if (resume) resume();
+	} else {
+		paused = true;
+		resume = undefined;
+	}
+};
+
+function f() {
+	i -= 1;
+	if (i < 0) i = srcs.length - 1;
+	var div2 = document.createElement('div');
+	var img2 = document.createElement('img');
+	img2.src = srcs[i] + "=s" + (window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight);
+	function swapPhotos() {
+		if (paused) {
+			resume = swapPhotos;
+			return;
+		}
+		var divCopy = div;
+		img.addEventListener('transitionend', function() { document.body.removeChild(divCopy); }, false);
+		img.style.opacity = 0;
+		img2.style.opacity = 1;
+		div = div2;
+		img = img2;
+		f();
+	}
+	var fiveSecondsElapsed = false;
+	var imageHasLoaded = false;
+	img2.onload = function() { if (fiveSecondsElapsed) swapPhotos(); else imageHasLoaded=true; }
+	window.setTimeout(function() { if (imageHasLoaded) swapPhotos(); else fiveSecondsElapsed=true; }, 5000);
+	div2.appendChild(img2);
+	document.body.appendChild(div2);
+}
+
+</script>
+</body>
+</html>
